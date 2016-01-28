@@ -2,8 +2,15 @@
 <html>
 <head>
     <title>Passenger's Side</title>
+    <meta name="viewport" content="initial-scale = 1.0, user-scalable = no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script>
+        document.ontouchmove = function(event){
+            event.preventDefault();
+        };
+    </script>
 </head>
 <body>
-    Hello Passenger's Side!
+    <img src="/public/img/passenger.png">
 </body>
 </html>
