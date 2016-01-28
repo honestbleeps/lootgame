@@ -76,11 +76,16 @@ WSGI_APPLICATION = 'liftloot.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'liftloot',
+        'USER': 'root',
+        'HOST': 'localhost',
+        'PASSWORD': 'l00t',
+        'OPTIONS': {'charset': 'utf8mb4'},
+        'TEST_CHARSET': 'UTF8',
+        'TEST_COLLATION': 'utf8_general_ci'
     }
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
