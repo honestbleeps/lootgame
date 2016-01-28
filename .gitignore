@@ -1,0 +1,23 @@
+.DS_Store
+.sass-cache/
+*.pyc
+*.swp
+*.sw0
+.coverage
+*.log
+*.mysql
+*.sql
+*.*~
+\#*.*
+ngrok
+node_modules
+bower_components
+
+# jetbrains/pycharm
+.idea
+
+public/CACHE/
+dev_settings.py
+
+uwsgi.restart
+uwsgi.reload
