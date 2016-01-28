@@ -21,6 +21,8 @@ urlpatterns = patterns(
     '',
     (r'^public/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.BASE_DIR + '/public'}),
 
+    url(r'^$', 'lyftloot.controllers.home', name='home'),
     url(r'^driver', 'lyftloot.controllers.driver', name='driver'),
+    url(r'^passenger', 'lyftloot.controllers.passenger', name='passenger'),
     url(r'^admin/', include(admin.site.urls)),
 )
