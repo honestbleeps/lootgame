@@ -1,4 +1,4 @@
-"""liftloot URL Configuration
+"""lyftloot URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
@@ -21,6 +21,6 @@ urlpatterns = patterns(
     '',
     (r'^public/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.BASE_DIR + '/public'}),
 
-    url(r'^driver', 'liftloot.controllers.driver', name='driver'),
+    url(r'^driver', 'lyftloot.controllers.driver', name='driver'),
     url(r'^admin/', include(admin.site.urls)),
 )
