@@ -2,15 +2,62 @@
 <html>
 <head>
     <title>QUIZ TIME: Passenger</title>
-
+    <style>
+        body {
+            background-image: url(/public/img/game_screen.png);
+            background-repeat: no-repeat;
+            background-size: 100%;
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+        }
+        .game {
+            background: white;
+            border-radius: 8px;
+            bottom: 36px;
+            box-shadow: 0 0 12px rgba(0,0,0,.25);
+            font-size: 80px;
+            font-weight: 200;
+            left: 36px;
+            position: absolute;
+            text-align: center;
+            right: 36px;
+        }
+        .game header {
+            background-color: #ea0b8c;
+            background-image: url(/public/img/lyftloot-white.svg);
+            background-repeat: no-repeat;
+            background-size: 80% 80%;
+            background-position: center center;
+            border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
+            height: 200px;
+        }
+        .game h1 {
+            font-size: 120px;
+        }
+        .game p {
+            padding: 36px;
+        }
+        .game a {
+            border-top: 1px solid #d8dce6;
+            color: black;
+            display: block;
+            font-size: 46px;
+            padding: 46px 36px;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>You got {{ correct_answers_count }} out of {{ all_answers_count }} correct, for ${{ lyft_credit }} in Lyft credit!</h1>
-
-    {% for a in all_answers %}
-        <b>{{ a.answer.question }}</b> {{ a.answer.answer }}: {% if a.answer.correct %}CORRECT!{% else %}INCORRECT!{% endif %}
-        <br>
-    {% endfor %}
-    <p></p>
+    <div class="game">
+        <header></header>
+        {% if correct_answers_count == 0 %}
+            <h1>Aw, good try.</h1>
+            <p>Thanks for playing Lyft Loot and better luck next time!</p>
+        {% else %}
+            <h1>Nice job!</h1>
+            <p>You got {{ correct_answers_count }} out of {{ all_answers_count }} questions correct.</p>
+            <p>You've won ${{ lyft_credit }} in Lyft credit!</p>
+        {% endif %}
+    </div>
 </body>
 </html>
