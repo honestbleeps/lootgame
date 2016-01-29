@@ -33,6 +33,8 @@
             int1 = setInterval(function() {
                 $('.lyftloot-pink').show();
                 $('.lyftloot-white').hide();
+                // flash the lights!
+                $.get('/lights/game_start');
             }, 1000);
             setTimeout(function() {
                 int2 = setInterval(function() {

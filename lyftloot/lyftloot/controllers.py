@@ -59,7 +59,7 @@ def quiz_passenger(request):
         # This is the first visit, create a new quiz!
         quiz = Quiz.objects.create(user=request.user)
         is_game_start = True
-        ls.game_start()
+        # ls.game_start()
         quiz_id = quiz.id
     else:
         # This is an answer to a question, so retrieve the current quiz id,
