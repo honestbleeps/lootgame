@@ -15,7 +15,7 @@
             });
         }
 
-        document.ontouchend = function(event) {
+        var go = function(event) {
             if (step == 2) {
                 window.PUBNUB.publish({
                     channel: 'LyftLoot',
@@ -30,6 +30,9 @@
                 $('body').attr('class', 'step' + step);
             }
         };
+
+        document.onclick = go;
+        document.ontouchend = go;
 
         function preload() {
             var img = new Image();
