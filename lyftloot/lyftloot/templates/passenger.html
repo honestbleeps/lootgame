@@ -5,11 +5,14 @@
     <meta name="viewport" content="initial-scale = 1.0, user-scalable = no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <script src="/public/js/jquery-2.2.0.min.js"></script>
+    <script src="//cdn.pubnub.com/pubnub.min.js"></script>
     <script>
-        document.ontouchmove = function(event){
-            flash();
-            event.preventDefault();
-        };
+
+        if (window.PUBNUB) {
+            var pubnub = window.PUBNUB.init({
+                subscribe_key : 'sub-c-958807dc-c63c-11e5-b684-02ee2ddab7fe'
+            });
+        }
 
         function flash() {
             var int1, int2;
@@ -27,8 +30,17 @@
                 clearInterval(int1);
                 clearInterval(int2);
                 $('.lyftloot').hide();
+                location.href = "/passenger/quiz"
             }, 5000);
         }
+
+        window.PUBNUB.subscribe({
+            channel: 'LyftLoot',
+            message: function(m){
+                console.log(m);
+                flash();
+            }
+        });
     </script>
 
     <style>
@@ -60,16 +72,9 @@
     </style>
 </head>
 <body>
+
     <div class="lyftloot lyftloot-pink"></div>
     <div class="lyftloot lyftloot-white"></div>
 
-    <script src="//cdn.pubnub.com/pubnub.min.js"></script>
-    <script>
-    if (window.PUBNUB) {
-        var pubnub = window.PUBNUB.init({
-            subscribe_key : 'sub-c-958807dc-c63c-11e5-b684-02ee2ddab7fe'
-        });
-    }
-    </script>
 </body>
 </html>
