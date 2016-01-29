@@ -24,6 +24,7 @@ urlpatterns = patterns(
     url(r'^$', 'lyftloot.controllers.home', name='home'),
     url(r'^driver', 'lyftloot.controllers.driver', name='driver'),
     url(r'^passenger', 'lyftloot.controllers.passenger', name='passenger'),
+    url(r'^lights/game_start', 'lyftloot.controllers.lights_game_start', name='lights_game_start'),
     url(r'^lights/incorrect', 'lyftloot.controllers.lights_incorrect', name='lights_incorrect'),
     url(r'^lights/correct', 'lyftloot.controllers.lights_correct', name='lights_correct'),
     url(r'^admin/', include(admin.site.urls)),
