@@ -1,8 +1,17 @@
+from threading import Thread
 from phue import Bridge
 import time
 #import logging
 
 #logging.basicConfig()
+
+def postpone(function):
+    def decorator(*args, **kwargs):
+        t = Thread(target = function, args=args, kwargs=kwargs)
+        t.daemon = True
+        t.start()
+    return decorator
+
 
 b = Bridge('10.59.6.13')
 
@@ -23,7 +32,7 @@ red = {'transitiontime': 1, 'bri': 254, 'xy': [0.7, 0.2986]}
 red_dark = {'transitiontime': 1, 'bri': 20, 'xy': [0.7, 0.2986]}
 green = {'transitiontime': 10, 'bri': 254, 'xy': [0.214, 0.709]}
 
-@background(0)
+@postpone
 def game_start():
     c = 0
     b.set_light(3, on)
@@ -36,14 +45,14 @@ def game_start():
     b.set_light(3, off)
 
 
-@background(0)
+@postpone
 def correct():
     b.set_light(3, on_no_bri)
     b.set_light(3, green)
     time.sleep(2)
     b.set_light(3, off)
 
-@background(0)
+@postpone
 def incorrect():
     c = 0
     while c < 5:
