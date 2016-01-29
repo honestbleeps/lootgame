@@ -20,6 +20,7 @@ class LightService:
     # off = {'on': False, 'transitiontime': 0}
 
     pink = {'on': True, 'transitiontime' : 0, 'bri': 254, 'xy': [0.4149, 0.1776]}
+    pink_end = {'on': True, 'transitiontime' : 30, 'bri': 1, 'xy': [0.4149, 0.1776]}
     white =  {'on': True, 'transitiontime' : 0, 'bri': 254, 'xy': [0.3227,0.329]}
     red = {'on': True, 'transitiontime': 1, 'bri': 254, 'xy': [0.7, 0.2986]}
     red_dark = {'on': True, 'transitiontime': 1, 'bri': 20, 'xy': [0.7, 0.2986]}
@@ -66,5 +67,9 @@ class LightService:
             c += 1
         self.bridge.set_light(3, self.off)
 
-
-
+    @postpone
+    def game_end(self):
+        self.bridge.set_light(3, self.pink)
+        self.bridge.set_light(3, self.pink_end)
+        time.sleep(3)
+        self.bridge.set_light(3, self.off)

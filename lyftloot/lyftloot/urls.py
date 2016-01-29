@@ -27,6 +27,7 @@ urlpatterns = patterns(
     url(r'^passenger', 'lyftloot.controllers.passenger', name='passenger'),
 
     url(r'^lights/game_start', 'lyftloot.controllers.lights_game_start', name='lights_game_start'),
+    url(r'^lights/game_end', 'lyftloot.controllers.lights_game_end', name='lights_game_end'),
     url(r'^lights/incorrect', 'lyftloot.controllers.lights_incorrect', name='lights_incorrect'),
     url(r'^lights/correct', 'lyftloot.controllers.lights_correct', name='lights_correct'),
 

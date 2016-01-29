@@ -37,16 +37,21 @@ def lights_incorrect(request):
     }
     return render_to_response("test_lights.html", context, RequestContext(request))
 
-
 def lights_correct(request):
     ls = LightService()
-    print ls
     ls.correct()
     context = {
         'lights': 'correct'
     }
     return render_to_response("test_lights.html", context, RequestContext(request))
 
+def lights_game_end(request):
+    ls = LightService()
+    ls.game_end()
+    context = {
+        'lights': 'game_end'
+    }
+    return render_to_response("test_lights.html", context, RequestContext(request))
 
 def quiz_passenger(request):
     print "request.method: ", request.method
