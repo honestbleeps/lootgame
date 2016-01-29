@@ -38,38 +38,38 @@ class LightService:
     def game_start(self):
         c = 0
         # preset the color before we turn things on
-        self.bridge.set_light(3, self.pink)
-        self.bridge.set_light(3, self.on)
+        self.bridge.set_light([3,4], self.pink)
+        self.bridge.set_light([3,4], self.on)
         while c < 8:
-            self.bridge.set_light(3, self.pink)
+            self.bridge.set_light([3,4], self.pink)
             time.sleep(.5)
-            self.bridge.set_light(3, self.white)
+            self.bridge.set_light([3,4], self.white)
             time.sleep(.5)
             c += 1
-        self.bridge.set_light(3, self.off)
+        self.bridge.set_light([3,4], self.off)
 
     @postpone
     def correct(self):
-        self.bridge.set_light(3, self.green_start)
-        self.bridge.set_light(3, self.green)
+        self.bridge.set_light([3,4], self.green_start)
+        self.bridge.set_light([3,4], self.green)
         time.sleep(2)
-        self.bridge.set_light(3, self.off)
+        self.bridge.set_light([3,4], self.off)
 
     @postpone
     def incorrect(self):
         c = 0
         while c < 5:
-            self.bridge.set_light(3, self.red)
-            # self.bridge.set_light(3, self.on)
+            self.bridge.set_light([3,4], self.red)
+            # self.bridge.set_light([3,4], self.on)
             time.sleep(.3)
-            self.bridge.set_light(3, self.red_dark)
+            self.bridge.set_light([3,4], self.red_dark)
             time.sleep(.3)
             c += 1
-        self.bridge.set_light(3, self.off)
+        self.bridge.set_light([3,4], self.off)
 
     @postpone
     def game_end(self):
-        self.bridge.set_light(3, self.pink)
-        self.bridge.set_light(3, self.pink_end)
+        self.bridge.set_light([3,4], self.pink)
+        self.bridge.set_light([3,4], self.pink_end)
         time.sleep(3)
-        self.bridge.set_light(3, self.off)
+        self.bridge.set_light([3,4], self.off)
