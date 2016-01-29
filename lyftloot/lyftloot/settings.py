@@ -104,6 +104,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Pubnub
+PUBNUB_SUBSCRIBE_KEY = "sub-c-958807dc-c63c-11e5-b684-02ee2ddab7fe"
+PUBNUB_PUBLISH_KEY = "pub-c-cb6f3fc7-58ea-491f-a399-911c9ecf8fa6"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/

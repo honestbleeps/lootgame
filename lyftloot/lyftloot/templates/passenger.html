@@ -62,5 +62,14 @@
 <body>
     <div class="lyftloot lyftloot-pink"></div>
     <div class="lyftloot lyftloot-white"></div>
+
+    <script src="//cdn.pubnub.com/pubnub.min.js"></script>
+    <script>
+    if (window.PUBNUB) {
+        var pubnub = window.PUBNUB.init({
+            subscribe_key : 'sub-c-958807dc-c63c-11e5-b684-02ee2ddab7fe'
+        });
+    }
+    </script>
 </body>
 </html>
