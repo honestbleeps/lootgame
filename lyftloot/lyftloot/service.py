@@ -39,11 +39,11 @@ class LightService:
         # preset the color before we turn things on
         self.bridge.set_light(3, self.pink)
         self.bridge.set_light(3, self.on)
-        while c < 10:
+        while c < 8:
             self.bridge.set_light(3, self.pink)
-            time.sleep(.2)
+            time.sleep(.5)
             self.bridge.set_light(3, self.white)
-            time.sleep(.2)
+            time.sleep(.5)
             c += 1
         self.bridge.set_light(3, self.off)
 
