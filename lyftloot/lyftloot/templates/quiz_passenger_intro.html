@@ -2,16 +2,66 @@
 <html>
 <head>
     <title>QUIZ INTRO</title>
-
+    <script src="/public/js/jquery-2.2.0.min.js"></script>
+    <script>
+        $(function() {
+            $('#game-form a').on('click', function(e) {
+                e.preventDefault();
+                $('#game-form').submit();
+            });
+        });
+    </script>
+    <style>
+        body {
+            background-image: url(/public/img/game_screen.png);
+            background-repeat: no-repeat;
+            background-size: 100%;
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+        }
+        .game {
+            background: white;
+            border-radius: 8px;
+            bottom: 36px;
+            box-shadow: 0 0 12px rgba(0,0,0,.25);
+            font-size: 80px;
+            font-weight: 200;
+            left: 36px;
+            position: absolute;
+            text-align: center;
+            right: 36px;
+        }
+        .game header {
+            background-color: #ea0b8c;
+            background-image: url(/public/img/lyftloot-white.svg);
+            background-repeat: no-repeat;
+            background-size: 80% 80%;
+            background-position: center center;
+            border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
+            height: 200px;
+        }
+        .game p {
+            padding: 36px;
+        }
+        .game a {
+            border-top: 1px solid #d8dce6;
+            color: black;
+            display: block;
+            font-size: 46px;
+            padding: 46px 36px;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>It's quiz time! This is your chance to win a monkey!</h1>
-    <p></p>
-    <form action="/passenger/quiz" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="quiz_id" value="{{ quiz_id }}"/>
-        <input type="submit" value="LET'S DO THIS"/>
-    </form>
-    <p></p>
+    <div class="game">
+        <header></header>
+        <p>It's quiz time! This is your chance to win a monkey!</p>
+        <form action="/passenger/quiz" method="post" id="game-form">
+            {% csrf_token %}
+            <input type="hidden" name="quiz_id" value="{{ quiz_id }}"/>
+            <a href>Start Playing Lyft Loot</a>
+        </form>
+    </div>
 </body>
 </html>
