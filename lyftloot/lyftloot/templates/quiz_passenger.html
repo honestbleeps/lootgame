@@ -53,29 +53,55 @@
             display: none;
         }
     </style>
+    <script>
+        function showNextQuestion() {
+            document.getElementById('previous_result').style.display = 'none';
+            document.getElementById('next_question').style.display = 'block';
+        }
+        function endSequence() {
+            location.href="/passenger/quiz/end/{{ quiz_id }}";
+        }
+    </script>
 </head>
 <body>
-    <div class="game">
-        <h1>{{ question }}</h1>
+    {% if previous_question %}
+    <div class="previous_result" id="previous_result">
+        {% if previous_answer_was_correct %}
+            <h1>That is correct!</h1>
+            <audio src="/public/sounds/correct.mp3" autoplay></audio>
+        {% else %}
+            <h1>That is incorrect!</h1>
+            <audio src="/public/sounds/incorrect.mp3" autoplay></audio>
+            <p><b>{{ previous_question }}</b></p>
+            {% for possible_answer in previous_possible_answers %}
+                <p>
+                    <span {% if possible_answer.correct %}style="font-weight: bold"{% endif %}>
+                        {{ possible_answer.answer }} {% if possible_answer.correct %} <---- TOTALLY THE RIGHT ANSWER {% endif %}
+                    </span> {% if possible_answer.id == previous_answer.id %} <---- YOUR WRONG ANSWER {% endif %}
+                </p>
+            {% endfor %}
+        {% endif %}
+
+        {% if next_question %}
+            <button onclick="showNextQuestion()">Next Question</button>
+        {% else %}
+            <button onclick="endSequence()">Sweet</button>
+        {% endif %}
+    </div>
+    {% endif %}
+    {% if next_question %}
+    <div class="game" id="next_question" {% if previous_question %}style="display: none"{% endif %}>
+        <h1>{{ next_question }}</h1>
         <form method="post" id="game-form">
             {% csrf_token %}
                 <input type="hidden" name="quiz_id" value="{{ quiz_id }}"/>
-            {% for possible_answer in possible_answers %}
-                <a href class="answer">
-                    <input type="radio" name="answer" value="{{ possible_answer.id }}">{{ possible_answer.answer }}<br>
-                </a>
+            {% for possible_answer in next_possible_answers %}
+            <a href class="answer">
+                <input type="radio" name="answer" value="{{ possible_answer.id }}">{{ possible_answer.answer }}<br>
+            </a>
             {% endfor %}
         </form>
     </div>
-
-    <div class="result">
-        {% if correct %}
-        <h1>You were correct!</h1>
-        <audio src="/public/sounds/correct.mp3" autoplay></audio>
-        {% elif correct != None %}
-        <h1>You were incorrect!</h1>
-        <audio src="/public/sounds/incorrect.mp3" autoplay></audio>
-        {% endif %}
-    </div>
+    {% endif %}
 </body>
 </html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QUIZ INTRO</title>
+
+</head>
+<body>
+    <h1>It's quiz time! This is your chance to win a monkey!</h1>
+    <p></p>
+    <form action="/passenger/quiz" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="quiz_id" value="{{ quiz_id }}"/>
+        <input type="submit" value="LET'S DO THIS"/>
+    </form>
+    <p></p>
+</body>
+</html>

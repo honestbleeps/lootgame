@@ -23,6 +23,9 @@ urlpatterns = patterns(
 
     url(r'^$', 'lyftloot.controllers.home', name='home'),
     url(r'^driver', 'lyftloot.controllers.driver', name='driver'),
+
+    url(r'^passenger/quiz/intro', 'lyftloot.controllers.quiz_passenger_intro', name='quiz_passenger'),
+    url(r'^passenger/quiz/end/(?P<quiz_id>[^/]+)', 'lyftloot.controllers.quiz_end_sequence', name='quiz_end_sequence'),
     url(r'^passenger/quiz', 'lyftloot.controllers.quiz_passenger', name='quiz_passenger'),
     url(r'^passenger', 'lyftloot.controllers.passenger', name='passenger'),
 
