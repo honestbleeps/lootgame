@@ -8,6 +8,9 @@ class QuizQuestion(models.Model):
     class Meta:
         db_table = "questions"
 
+    def __unicode__(self):
+        return self.question[0:min(400, len(self.question))]
+
 
 class QuizAnswer(models.Model):
     question = models.ForeignKey(QuizQuestion)
@@ -17,6 +20,9 @@ class QuizAnswer(models.Model):
     class Meta:
         db_table = "answers"
 
+    def __unicode__(self):
+        return u"{}: {}".format(self.correct, self.answer[0:min(400, len(self.answer))])
+
 
 class Quiz(models.Model):
     user = models.ForeignKey(User)
@@ -24,6 +30,9 @@ class Quiz(models.Model):
 
     class Meta:
         db_table = "quizzes"
+
+    def __unicode__(self):
+        return "{} {}".format(self.user.username, self.started_at)
 
 
 class UserAnswer(models.Model):
