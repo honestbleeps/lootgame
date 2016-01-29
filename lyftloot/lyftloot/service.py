@@ -59,10 +59,10 @@ class LightService:
         c = 0
         while c < 5:
             self.bridge.set_light(3, self.red)
-            self.bridge.set_light(3, self.on)
-            time.sleep(.1)
+            # self.bridge.set_light(3, self.on)
+            time.sleep(.3)
             self.bridge.set_light(3, self.red_dark)
-            time.sleep(.1)
+            time.sleep(.3)
             c += 1
         self.bridge.set_light(3, self.off)
 
