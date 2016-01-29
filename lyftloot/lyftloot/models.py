@@ -21,7 +21,9 @@ class QuizAnswer(models.Model):
         db_table = "answers"
 
     def __unicode__(self):
-        return u"{}: {}".format(self.correct, self.answer[0:min(400, len(self.answer))])
+        return u"{}: {}: {}".format(self.question,
+                                    self.answer[0:min(400, len(self.answer))],
+                                    self.correct)
 
 
 class Quiz(models.Model):
@@ -32,14 +34,15 @@ class Quiz(models.Model):
         db_table = "quizzes"
 
     def __unicode__(self):
-        return "{} {}".format(self.user.username, self.started_at)
+        return u"{} {} {}".format(self.user.username, self.id, self.started_at)
 
 
 class UserAnswer(models.Model):
     quiz = models.ForeignKey(Quiz)
-    question = models.ForeignKey(QuizQuestion)
     answer = models.ForeignKey(QuizAnswer)
 
     class Meta:
         db_table = "user_answers"
-        unique_together = ("quiz", "question")
+
+    def __unicode__(self):
+        return u"{}: {}".format(self.quiz.user.username, self.answer)

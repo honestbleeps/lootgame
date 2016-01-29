@@ -39,7 +39,7 @@ admin.site.register(Quiz, QuizAdmin)
 
 
 class UserAnswerAdmin(admin.ModelAdmin):
-    list_display = ["id", "quiz", "is_correct"]
+    list_display = ["id", "answer", "quiz", "is_correct"]
     readonly_fields = ["is_correct"]
 
     def is_correct(self, obj):
