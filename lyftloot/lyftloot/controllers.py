@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
-from models import QuizAnswer, Quiz, QuizQuestion, UserAnswer
+from models import QuizAnswer, Quiz, QuizQuestion, UserAnswer, User
 
 from service import LightService
 
@@ -57,7 +57,9 @@ def quiz_passenger(request):
     is_game_start = False
     if request.method == "GET":
         # This is the first visit, create a new quiz!
-        quiz = Quiz.objects.create(user=request.user)
+        # HACKTACULAR! hard code user to 1! This makes me a sad panda.
+        the_user = User.objects.get(id=1)
+        quiz = Quiz.objects.create(user=the_user)
         is_game_start = True
         # ls.game_start()
         quiz_id = quiz.id
