@@ -29,30 +29,33 @@
         };
 
         function flash() {
-            var int1, int2;
-            int1 = setInterval(function() {
+            var int1,
+                int2,
+                start_sound = document.querySelector('#game_start_sound');
+            function flip() {
                 $('.lyftloot-pink').show();
                 $('.lyftloot-white').hide();
-            }, 1000);
+            }
+            function flop() {
+                $('.lyftloot-pink').hide();
+                $('.lyftloot-white').show();
+            }
+
+            flip();
+            start_sound.play();
+            // flash the lights!
+            $.get('/lights/game_start');
+
+            int1 = setInterval(flip, 1000);
             setTimeout(function() {
-                // play the sound!
-                var start_sound = document.querySelector('#game_start_sound');
-                start_sound.play();
-                // flash the lights!
-                $.get('/lights/game_start');
-            }, 1000);
-            setTimeout(function() {
-                int2 = setInterval(function() {
-                    $('.lyftloot-pink').hide();
-                    $('.lyftloot-white').show();
-                }, 1000);
+                int2 = setInterval(flop, 1000);
             }, 500);
             setTimeout(function() {
                 clearInterval(int1);
                 clearInterval(int2);
                 $('.lyftloot').hide();
                 location.href = "/passenger/quiz";
-            }, 5000);
+            }, 8000);
         }
 
         window.PUBNUB.subscribe({
