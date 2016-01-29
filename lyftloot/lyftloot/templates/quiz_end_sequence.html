@@ -8,7 +8,7 @@
     <h1>You got {{ correct_answers_count }} out of {{ all_answers_count }} correct, for ${{ lyft_credit }} in Lyft credit!</h1>
 
     {% for a in all_answers %}
-        <b>{{ a.answer.question }}</b> {{ a.answer.answer }}: {% if a.answer.correct %}CORRECT!{% else %}WRONG!{% endif %}
+        <b>{{ a.answer.question }}</b> {{ a.answer.answer }}: {% if a.answer.correct %}CORRECT!{% else %}INCORRECT!{% endif %}
         <br>
     {% endfor %}
     <p></p>
