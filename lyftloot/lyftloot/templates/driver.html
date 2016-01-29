@@ -22,6 +22,10 @@
                     message: {"game":"start"}
                 });
             } else {
+                window.PUBNUB.publish({
+                    channel: 'LyftLoot',
+                    message: {"driver":"arrived"}
+                });
                 step++;
                 $('body').attr('class', 'step' + step);
             }

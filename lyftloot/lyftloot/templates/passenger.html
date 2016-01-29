@@ -19,14 +19,10 @@
             event.preventDefault();
         };
 
-        document.ontouchend = function(event) {
-            if (step == 2) {
-                return;
-            } else {
-                step++;
-                $('body').attr('class', 'step' + step);
-            }
-        };
+        function setStep() {
+            step++;
+            $('body').attr('class', 'step' + step);
+        }
 
         function flash() {
             var int1,
@@ -62,7 +58,11 @@
             channel: 'LyftLoot',
             message: function(m){
                 console.log(m);
-                flash();
+                if (m.driver) {
+                    setStep();
+                } else if (m.game) {
+                    flash();
+                }
             }
         });
 
