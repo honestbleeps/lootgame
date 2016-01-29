@@ -33,6 +33,11 @@
             int1 = setInterval(function() {
                 $('.lyftloot-pink').show();
                 $('.lyftloot-white').hide();
+            }, 1000);
+            setTimeout(function() {
+                // play the sound!
+                var start_sound = document.querySelector('#game_start_sound');
+                start_sound.play();
                 // flash the lights!
                 $.get('/lights/game_start');
             }, 1000);
@@ -107,5 +112,6 @@
 <body class="step1">
     <div class="lyftloot lyftloot-pink"></div>
     <div class="lyftloot lyftloot-white"></div>
+    <audio id="game_start_sound" src="/public/sounds/game_start.mp3"></audio>
 </body>
 </html>
