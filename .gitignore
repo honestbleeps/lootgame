@@ -6,7 +6,6 @@
 .coverage
 *.log
 *.mysql
-*.sql
 *.*~
 \#*.*
 ngrok
