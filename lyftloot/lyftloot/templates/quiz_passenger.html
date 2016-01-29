@@ -24,6 +24,13 @@
             <p><input type="submit"/></p>
         </form>
     {% endif %}
+    {% if correct %}
+    <h1>You were correct!</h1>
+    <audio src="/public/sounds/correct.mp3" autoplay></audio>
+    {% elif correct != None %}
+    <h1>You were incorrect!</h1>
+    <audio src="/public/sounds/incorrect.mp3" autoplay></audio>
+    {% endif %}
 
 </body>
 </html>
