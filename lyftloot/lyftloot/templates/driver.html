@@ -5,14 +5,22 @@
     <meta name="viewport" content="initial-scale = 1.0, user-scalable = no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <script src="/public/js/jquery-2.2.0.min.js"></script>
+    <script src="//cdn.pubnub.com/pubnub.min.js"></script>
     <script>
         var step = 1;
-        document.ontouchmove = function(event){
-            event.preventDefault();
-        };
+
+        if (window.PUBNUB) {
+            var pubnub = window.PUBNUB.init({
+                subscribe_key : 'sub-c-958807dc-c63c-11e5-b684-02ee2ddab7fe'
+            });
+        }
+
         document.ontouchend = function(event) {
             if (step == 2) {
-                alert('start the game!')
+                window.PUBNUB.publish({
+                    channel: 'LyftLoot',
+                    message: {"game":"start"}
+                });
             } else {
                 step++;
                 $('body').attr('class', 'step' + step);
