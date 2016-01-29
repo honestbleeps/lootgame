@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from lyftloot import service as light_service
+from lyftloot.service import LightService
 
 def driver(request):
     context = {}
@@ -16,12 +16,27 @@ def passenger(request):
 def home(request):
     return HttpResponseRedirect("/passenger")
 
+def lights_game_start(request):
+    ls = LightService()
+    ls.game_start()
+    context = {
+        'lights': 'game_start'
+    }
+    return render_to_response("test_lights.html", context, RequestContext(request))
+
 def lights_incorrect(request):
-    light_service.incorrect()
-    context = {}
+    ls = LightService()
+    ls.incorrect()
+    context = {
+        'lights': 'incorrect'
+    }
     return render_to_response("test_lights.html", context, RequestContext(request))
 
 def lights_correct(request):
-    light_service.correct()
-    context = {}
+    ls = LightService()
+    print ls
+    ls.correct()
+    context = {
+        'lights': 'correct'
+    }
     return render_to_response("test_lights.html", context, RequestContext(request))
