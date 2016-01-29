@@ -4,13 +4,63 @@
     <title>Passenger's Side</title>
     <meta name="viewport" content="initial-scale = 1.0, user-scalable = no">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="/public/js/jquery-2.2.0.min.js"></script>
     <script>
         document.ontouchmove = function(event){
+            flash();
             event.preventDefault();
         };
+
+        function flash() {
+            var int1, int2;
+            int1 = setInterval(function() {
+                $('.lyftloot-pink').show();
+                $('.lyftloot-white').hide();
+            }, 1000);
+            setTimeout(function() {
+                int2 = setInterval(function() {
+                    $('.lyftloot-pink').hide();
+                    $('.lyftloot-white').show();
+                }, 1000);
+            }, 500);
+            setTimeout(function() {
+                clearInterval(int1);
+                clearInterval(int2);
+                $('.lyftloot').hide();
+            }, 5000);
+        }
     </script>
+
+    <style>
+        body {
+            background: url(/public/img/passenger.png) no-repeat;
+            background-size: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .lyftloot {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: 80%;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+        .lyftloot-pink {
+            background-color: #ea0b8c;
+            background-image: url(/public/img/lyftloot-white.svg);
+        }
+        .lyftloot-white {
+            background-color: #fff;
+            background-image: url(/public/img/lyftloot-pink.svg);
+        }
+    </style>
 </head>
 <body>
-    <img src="/public/img/passenger.png">
+    <div class="lyftloot lyftloot-pink"></div>
+    <div class="lyftloot lyftloot-white"></div>
 </body>
 </html>

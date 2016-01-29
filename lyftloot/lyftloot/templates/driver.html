@@ -1,9 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Driver's Side</title>
+    <title>Passenger's Side</title>
+    <meta name="viewport" content="initial-scale = 1.0, user-scalable = no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="/public/js/jquery-2.2.0.min.js"></script>
+    <script>
+        var step = 1;
+        document.ontouchmove = function(event){
+            event.preventDefault();
+        };
+        document.ontouchend = function(event) {
+            if (step == 2) {
+                alert('start the game!')
+            } else {
+                step++;
+                $('body').attr('class', 'step' + step);
+            }
+        };
+    </script>
+
+    <style>
+        body {
+            background-size: 100%;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+        .step1 {
+            background-image: url(/public/img/driver1.png);
+        }
+        .step2 {
+            background-image: url(/public/img/driver2.png);
+        }
+    </style>
 </head>
-<body>
-    Hello Driver's Side!
+<body class="step1">
 </body>
 </html>
