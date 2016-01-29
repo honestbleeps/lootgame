@@ -45,6 +45,7 @@ def lights_correct(request):
     }
     return render_to_response("test_lights.html", context, RequestContext(request))
 
+
 def lights_game_end(request):
     ls = LightService()
     ls.game_end()
@@ -52,6 +53,7 @@ def lights_game_end(request):
         'lights': 'game_end'
     }
     return render_to_response("test_lights.html", context, RequestContext(request))
+
 
 def quiz_passenger(request):
     print "request.method: ", request.method
@@ -81,28 +83,22 @@ def quiz_passenger(request):
         else:
             ls.incorrect()
 
-    get_object_or_404(Quiz, pk=quiz_id)
+    quiz = get_object_or_404(Quiz, pk=quiz_id)
 
     # Retrieve a question the user hasn't answered yet
-    already_answered = UserAnswer.objects.filter(quiz_id=quiz_id)
+    already_answered = UserAnswer.objects.filter(quiz_id=quiz.id)
     already_answered = [a.answer.question.id for a in already_answered]
     question = QuizQuestion.objects.exclude(id__in=already_answered).first()
 
-    if question:
-        possible_answers = QuizAnswer.objects.filter(question_id=question.id)
+    if not question:
+        return quiz_end_sequence(request, quiz_id)
 
-        context = {
-            "question": question,  # Note this could be None
-            "possible_answers": possible_answers,
-        }
-    else:
-        all_answers = UserAnswer.objects.filter(quiz_id=quiz_id)
-        context = {
-            "quiz_finished": True,
-            "all_answers": all_answers,
-            "all_answers_count": all_answers.count(),
-            "correct_answers_count": UserAnswer.objects.filter(quiz_id=quiz_id, answer__correct=True).count(),
-        }
+    possible_answers = QuizAnswer.objects.filter(question_id=question.id)
+
+    context = {
+        "question": question,  # Note this could be None
+        "possible_answers": possible_answers,
+    }
 
     if correct is not None:
         context["correct"] = correct
@@ -112,3 +108,14 @@ def quiz_passenger(request):
 
     return render_to_response("quiz_passenger.html", context, RequestContext(request))
 
+
+def quiz_end_sequence(request, quiz_id):
+    all_answers = UserAnswer.objects.filter(quiz_id=quiz_id)
+    context = {
+        "quiz_id": quiz_id,
+        "all_answers": all_answers,
+        "all_answers_count": all_answers.count(),
+        "correct_answers_count": UserAnswer.objects.filter(quiz_id=quiz_id, answer__correct=True).count(),
+    }
+
+    return render_to_response("quiz_end_sequence.html", context, RequestContext(request))

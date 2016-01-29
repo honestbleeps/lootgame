@@ -2,28 +2,17 @@
 <html>
 <head>
     <title>QUIZ TIME: Passenger</title>
-
 </head>
 <body>
-    {% if quiz_finished %}
-        <h1>You got {{ correct_answers_count }} Correct! Out of {{ all_answers_count }}</h1>
-
-        {% for a in all_answers %}
-            <b>{{ a.answer.question }}</b> {{ a.answer.answer }}: {% if a.answer.correct %}CORRECT!{% else %}WRONG!{% endif %}
-            <br>
+    <h1>{{ question }}</h1>
+    <form method="post">
+        {% csrf_token %}
+            <input type="hidden" name="quiz_id" value="{{ quiz_id }}"/>
+        {% for possible_answer in possible_answers %}
+            <input type="radio" name="answer" value="{{ possible_answer.id }}">{{ possible_answer.answer }}<br>
         {% endfor %}
-        <p></p>
-    {% else %}
-        <h1>{{ question }}</h1>
-        <form method="post">
-            {% csrf_token %}
-                <input type="hidden" name="quiz_id" value="{{ quiz_id }}"/>
-            {% for possible_answer in possible_answers %}
-                <input type="radio" name="answer" value="{{ possible_answer.id }}">{{ possible_answer.answer }}<br>
-            {% endfor %}
-            <p><input type="submit"/></p>
-        </form>
-    {% endif %}
+        <p><input type="submit"/></p>
+    </form>
     {% if correct %}
     <h1>You were correct!</h1>
     <audio src="/public/sounds/correct.mp3" autoplay></audio>
@@ -31,6 +20,5 @@
     <h1>You were incorrect!</h1>
     <audio src="/public/sounds/incorrect.mp3" autoplay></audio>
     {% endif %}
-
 </body>
 </html>
