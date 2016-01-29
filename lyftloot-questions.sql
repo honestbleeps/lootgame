@@ -16,6 +16,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `user_answers`
+--
+
+DROP TABLE IF EXISTS `user_answers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_answers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `answer_id` int(11) NOT NULL,
+  `quiz_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_answers_answer_id_6a5031f87c4b8d39_fk_answers_id` (`answer_id`),
+  KEY `user_answers_baedd54c` (`quiz_id`),
+  CONSTRAINT `user_answers_answer_id_6a5031f87c4b8d39_fk_answers_id` FOREIGN KEY (`answer_id`) REFERENCES `answers` (`id`),
+  CONSTRAINT `user_answers_quiz_id_66ffd205c4b4cfb0_fk_quizzes_id` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
 -- Table structure for table `quizzes`
 --
 
