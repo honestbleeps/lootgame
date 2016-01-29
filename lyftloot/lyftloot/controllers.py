@@ -111,11 +111,14 @@ def quiz_passenger(request):
 
 def quiz_end_sequence(request, quiz_id):
     all_answers = UserAnswer.objects.filter(quiz_id=quiz_id)
+    answers_correct = UserAnswer.objects.filter(quiz_id=quiz_id, answer__correct=True).count()
+    lyft_credit = answers_correct * 5
     context = {
+        "lyft_credit": lyft_credit,
         "quiz_id": quiz_id,
         "all_answers": all_answers,
         "all_answers_count": all_answers.count(),
-        "correct_answers_count": UserAnswer.objects.filter(quiz_id=quiz_id, answer__correct=True).count(),
+        "correct_answers_count": answers_correct,
     }
 
     return render_to_response("quiz_end_sequence.html", context, RequestContext(request))
