@@ -7,12 +7,26 @@
     <script src="/public/js/jquery-2.2.0.min.js"></script>
     <script src="//cdn.pubnub.com/pubnub.min.js"></script>
     <script>
-
         if (window.PUBNUB) {
             var pubnub = window.PUBNUB.init({
                 subscribe_key : 'sub-c-958807dc-c63c-11e5-b684-02ee2ddab7fe'
             });
         }
+
+        var step = 1;
+
+        document.ontouchmove = function(event){
+            event.preventDefault();
+        };
+
+        document.ontouchend = function(event) {
+            if (step == 2) {
+                return;
+            } else {
+                step++;
+                $('body').attr('class', 'step' + step);
+            }
+        };
 
         function flash() {
             var int1, int2;
@@ -30,7 +44,7 @@
                 clearInterval(int1);
                 clearInterval(int2);
                 $('.lyftloot').hide();
-                location.href = "/passenger/quiz"
+                location.href = "/passenger/quiz";
             }, 5000);
         }
 
@@ -41,14 +55,31 @@
                 flash();
             }
         });
+
+        function preload() {
+            var img = new Image();
+            for (i = 0; i < preload.arguments.length; i++) {
+                img.src = preload.arguments[i];
+            }
+        }
+        preload(
+            "/public/img/rider1.png",
+            "/public/img/rider2.png"
+        );
     </script>
 
     <style>
         body {
-            background: url(/public/img/passenger.png) no-repeat;
+            background-repeat: no-repeat;
             background-size: 100%;
             margin: 0;
             padding: 0;
+        }
+        .step1 {
+            background-image: url(/public/img/rider1.png);
+        }
+        .step2 {
+            background-image: url(/public/img/rider2.png);
         }
         .lyftloot {
             display: none;
@@ -71,10 +102,8 @@
         }
     </style>
 </head>
-<body>
-
+<body class="step1">
     <div class="lyftloot lyftloot-pink"></div>
     <div class="lyftloot lyftloot-white"></div>
-
 </body>
 </html>

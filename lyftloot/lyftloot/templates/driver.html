@@ -26,6 +26,17 @@
                 $('body').attr('class', 'step' + step);
             }
         };
+
+        function preload() {
+            var img = new Image();
+            for (i = 0; i < preload.arguments.length; i++) {
+                img.src = preload.arguments[i];
+            }
+        }
+        preload(
+            "/public/img/driver1.png",
+            "/public/img/driver2.png"
+        );
     </script>
 
     <style>
