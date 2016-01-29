@@ -2,6 +2,17 @@
 <html>
 <head>
     <title>QUIZ TIME: Passenger</title>
+    <script src="/public/js/jquery-2.2.0.min.js"></script>
+    <script>
+        $(function() {
+            $('.answer').on('click', function(e) {
+                e.preventDefault();
+                $(e.target)
+                    .find('input[type="radio"]').prop("checked", true)
+                    .closest('form').submit();
+            });
+        });
+    </script>
     <style>
         body {
             background-image: url(/public/img/game_screen.png);
@@ -17,32 +28,43 @@
             left: 36px;
             position: absolute;
             right: 36px;
-            top: 140px;
         }
         .game h1 {
             background: #f3f3f5;
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
             color: #352384;
-            font-size: 40px;
+            font-size: 50px;
             font-weight: 400;
             margin: 0;
             padding: 48px 24px;
             text-align: center;
             text-transform: uppercase;
         }
+        .game .answer {
+            border-top: 1px solid #d8dce6;
+            color: black;
+            display: block;
+            font-size: 46px;
+            padding: 46px 36px;
+            text-decoration: none;
+        }
+        .game .answer input[type="radio"] {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="game">
         <h1>{{ question }}</h1>
-        <form method="post">
+        <form method="post" id="game-form">
             {% csrf_token %}
                 <input type="hidden" name="quiz_id" value="{{ quiz_id }}"/>
             {% for possible_answer in possible_answers %}
-                <input type="radio" name="answer" value="{{ possible_answer.id }}">{{ possible_answer.answer }}<br>
+                <a href class="answer">
+                    <input type="radio" name="answer" value="{{ possible_answer.id }}">{{ possible_answer.answer }}<br>
+                </a>
             {% endfor %}
-            <p><input type="submit"/></p>
         </form>
     </div>
 
