@@ -88,6 +88,7 @@ def quiz_passenger(request):
 
     # Retrieve a question the user hasn't answered yet
     already_answered = UserAnswer.objects.filter(quiz_id=quiz.id)
+    print "already_answered: ", already_answered
     already_answered_ids = [a.answer.question.id for a in already_answered]
     question = QuizQuestion.objects.exclude(id__in=already_answered_ids).first()
 
