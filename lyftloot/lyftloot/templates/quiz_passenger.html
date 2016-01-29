@@ -30,6 +30,8 @@
     {% elif correct != None %}
     <h1>You were incorrect!</h1>
     <audio src="/public/sounds/incorrect.mp3" autoplay></audio>
+    {% elif game_start %}
+    <audio src="/public/sounds/game_start.mp3" autoplay></audio>
     {% endif %}
 
 </body>

@@ -54,9 +54,11 @@ def quiz_passenger(request):
     print "request.GET: ", request.GET
     ls = LightService()
     correct = None
+    is_game_start = False
     if request.method == "GET":
         # This is the first visit, create a new quiz!
         quiz = Quiz.objects.create(user=request.user)
+        is_game_start = True
         ls.game_start()
         quiz_id = quiz.id
     else:
@@ -97,6 +99,8 @@ def quiz_passenger(request):
 
     if correct is not None:
         context["correct"] = correct
+    if is_game_start:
+        context["game_start"] = True
     context["quiz_id"] = quiz_id
 
     return render_to_response("quiz_passenger.html", context, RequestContext(request))
