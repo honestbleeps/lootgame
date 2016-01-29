@@ -2,23 +2,58 @@
 <html>
 <head>
     <title>QUIZ TIME: Passenger</title>
+    <style>
+        body {
+            background-image: url(/public/img/game_screen.png);
+            background-repeat: no-repeat;
+            background-size: 100%;
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+        }
+        .game {
+            background: white;
+            border-radius: 8px;
+            bottom: 36px;
+            box-shadow: 0 0 12px rgba(0,0,0,.25);
+            left: 36px;
+            position: absolute;
+            right: 36px;
+            top: 140px;
+        }
+        .game h1 {
+            background: #f3f3f5;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            color: #352384;
+            font-size: 40px;
+            font-weight: 400;
+            margin: 0;
+            padding: 48px 24px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ question }}</h1>
-    <form method="post">
-        {% csrf_token %}
-            <input type="hidden" name="quiz_id" value="{{ quiz_id }}"/>
-        {% for possible_answer in possible_answers %}
-            <input type="radio" name="answer" value="{{ possible_answer.id }}">{{ possible_answer.answer }}<br>
-        {% endfor %}
-        <p><input type="submit"/></p>
-    </form>
-    {% if correct %}
-    <h1>You were correct!</h1>
-    <audio src="/public/sounds/correct.mp3" autoplay></audio>
-    {% elif correct != None %}
-    <h1>You were incorrect!</h1>
-    <audio src="/public/sounds/incorrect.mp3" autoplay></audio>
-    {% endif %}
+    <div class="game">
+        <h1>{{ question }}</h1>
+        <form method="post">
+            {% csrf_token %}
+                <input type="hidden" name="quiz_id" value="{{ quiz_id }}"/>
+            {% for possible_answer in possible_answers %}
+                <input type="radio" name="answer" value="{{ possible_answer.id }}">{{ possible_answer.answer }}<br>
+            {% endfor %}
+            <p><input type="submit"/></p>
+        </form>
+    </div>
+
+    <div class="result">
+        {% if correct %}
+        <h1>You were correct!</h1>
+        <audio src="/public/sounds/correct.mp3" autoplay></audio>
+        {% elif correct != None %}
+        <h1>You were incorrect!</h1>
+        <audio src="/public/sounds/incorrect.mp3" autoplay></audio>
+        {% endif %}
+    </div>
 </body>
 </html>
