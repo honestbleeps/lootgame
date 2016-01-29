@@ -10,8 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
-from django.conf import settings
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
@@ -84,7 +82,7 @@ DATABASES = {
         'NAME': 'lyftloot',
         'USER': 'root',
         'HOST': 'localhost',
-        'PASSWORD': '',
+        'PASSWORD': 'l00t',
         'OPTIONS': {'charset': 'utf8mb4'},
         'TEST_CHARSET': 'UTF8',
         'TEST_COLLATION': 'utf8_general_ci'
