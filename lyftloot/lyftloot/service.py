@@ -19,9 +19,9 @@ class LightService:
     on_no_bri = {'on': True, 'bri': 0, 'transitiontime': 0}
     # off = {'on': False, 'transitiontime': 0}
 
-    pink = {'on': True, 'transitiontime' : 0, 'bri': 254, 'xy': [0.4149, 0.1776]}
-    pink_end = {'on': True, 'transitiontime' : 30, 'bri': 1, 'xy': [0.4149, 0.1776]}
-    white =  {'on': True, 'transitiontime' : 0, 'bri': 254, 'xy': [0.3227,0.329]}
+    pink = {'on': True, 'transitiontime': 0, 'bri': 254, 'xy': [0.4149, 0.1776]}
+    pink_end = {'on': True, 'transitiontime': 30, 'bri': 1, 'xy': [0.4149, 0.1776]}
+    white =  {'on': True, 'transitiontime': 0, 'bri': 254, 'xy': [0.3227,0.329]}
     red = {'on': True, 'transitiontime': 0, 'bri': 254, 'xy': [0.7, 0.2986]}
     red_dark = {'on': True, 'transitiontime': 0, 'bri': 20, 'xy': [0.7, 0.2986]}
     green_start = {'on': True, 'transitiontime': 0, 'bri': 1, 'xy': [0.214, 0.709]}
