@@ -52,9 +52,11 @@ def quiz_passenger(request):
     print "request.method: ", request.method
     print "request.POST: ", request.POST
     print "request.GET: ", request.GET
+    ls = LightService()
     if request.method == "GET":
         # This is the first visit, create a new quiz!
         quiz = Quiz.objects.create(user=request.user)
+        ls.game_start()
         quiz_id = quiz.id
     else:
         # This is an answer to a question, so retrieve the current quiz id,
@@ -62,7 +64,12 @@ def quiz_passenger(request):
         quiz_id = request.POST.get("quiz_id")
         answer_id = request.POST.get("answer")
 
-        UserAnswer.objects.get_or_create(quiz_id=quiz_id, answer_id=answer_id)
+        user_answer, created = UserAnswer.objects.get_or_create(quiz_id=quiz_id, answer_id=answer_id)
+        correct = user_answer.answer.correct
+        if correct:
+            ls.correct()
+        else:
+            ls.incorrect()
 
     get_object_or_404(Quiz, pk=quiz_id)
 
