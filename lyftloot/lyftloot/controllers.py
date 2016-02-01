@@ -18,7 +18,8 @@ def passenger(request):
 
 
 def home(request):
-    return HttpResponseRedirect("/passenger")
+    return HttpResponseRedirect("https://www.youtube.com/watch?v=EBwtYmvCSHc")
+    # return HttpResponseRedirect("/passenger")
 
 
 def lights_game_start(request):
